@@ -109,9 +109,8 @@ suite.endWithWrite = testWithContext(function(done, CTX) {
     var msg = randomString();
     var pull = CTX.socket('PULL');
     pull.connect('testEndWithWrite');
-    pull.setEncoding('utf8');
     pull.on('data', function(m) {
-        if (m === msg) done();
+        if (m.content.toString() === msg) done();
     });
     var push = CTX.socket('PUSH');
     push.connect('testEndWithWrite', function() {
@@ -150,9 +149,8 @@ suite.simplestPushPull = testWithContext(function(done, CTX) {
     var push = CTX.socket('PUSH');
     var pull = CTX.socket('PULL');
     var msg = randomString();
-    pull.setEncoding('utf8');
     pull.on('data', function(m) {
-        assert.equal(msg, m);
+        assert.equal(msg, m.content.toString());
         done();
     });
 
@@ -165,9 +163,8 @@ suite.simplestPushPull = testWithContext(function(done, CTX) {
 suite.simplestPubSub = testWithContext(function(done, CTX) {
     var pub = CTX.socket('PUB');
     var sub = CTX.socket('SUB');
-    sub.setEncoding('utf8');
     sub.on('data', function(msg) {
-        assert.equal('foo', msg);
+        assert.equal('foo', msg.content.toString());
         done();
     });
 
@@ -181,10 +178,9 @@ suite.simplestPubSub = testWithContext(function(done, CTX) {
 suite.topicPubSub = testWithContext(function(done, CTX) {
   var pub = CTX.socket('PUB', {routing: 'topic'});
   var sub = CTX.socket('SUB', {routing: 'topic'});
-  sub.setEncoding('utf8');
   var content = randomString();
   sub.on('data', function(msg) {
-    try { assert.equal(content, msg); done(); }
+    try { assert.equal(content, msg.content.toString()); done(); }
     catch (e) { done(e); }
   });
 
@@ -197,12 +193,11 @@ suite.topicPubSub = testWithContext(function(done, CTX) {
 
 suite.simplestWorker = testWithContext(function(done, CTX) {
   var work = CTX.socket('WORKER');
-  work.setEncoding('utf8');
   var send = CTX.socket('PUSH');
   var task = randomString();
   work.on('data', function(msg) {
     work.ack();
-    assert.ok(msg == task);
+    assert.ok(msg.content.toString() == task);
     done();
   });
   send.connect('test-worker', function() {
@@ -216,15 +211,13 @@ suite.simplestReqRep = testWithContext(function(done, CTX) {
     var req = CTX.socket('REQ');
     var rep = CTX.socket('REP');
 
-    rep.setEncoding('utf8');
     rep.on('data', function(msg) {
-        assert.equal('question', msg);
+        assert.equal('question', msg.content.toString());
         rep.write('answer');
     });
 
-    req.setEncoding('utf8');
     req.on('data', function(msg) {
-        assert.equal('answer', msg);
+        assert.equal('answer', msg.content.toString());
         done();
     });
 
@@ -237,15 +230,14 @@ suite.simplestReqRep = testWithContext(function(done, CTX) {
 
 suite.outOfOrderReplies = testWithContext(function(done, CTX) {
     var req = CTX.socket('REQ');
-    req.setEncoding('utf8');
     var expect = ['first', 'second', 'third'];
     req.on('data', function(msg) {
-        if (msg === expect[0]) {
+        if (msg.content.toString() === expect[0]) {
             expect.shift();
             if (expect.length == 0) done();
         }
         else
-            done(new Error('Message received out of order: ' + msg));
+            done(new Error('Message received out of order: ' + msg.content.toString()));
     });
 
     var reps = [CTX.socket('REP'),
@@ -261,7 +253,7 @@ suite.outOfOrderReplies = testWithContext(function(done, CTX) {
     }
 
     function onData(name, msg) {
-        switch (msg) {
+        switch (msg.content.toString()) {
         case 'one': inOrder[0] = this; break;
         case 'two': inOrder[1] = this; break;
         case 'three': inOrder[2] = this; break;
@@ -273,7 +265,6 @@ suite.outOfOrderReplies = testWithContext(function(done, CTX) {
 
     function doConnect(i) {
         if (i < reps.length) {
-            reps[i].setEncoding('utf8');
             reps[i].on('data', onData.bind(reps[i], i));
             reps[i].connect('testOutOfOrder',
                             doConnect.bind(null, i+1));
@@ -299,9 +290,8 @@ suite.allSubs = testWithContext(function(done, CTX) {
             return cont();
         }
         var sub = subs[i];
-        sub.setEncoding('utf8');
         sub.on('data', function(msg) {
-            assert.equal('multi', msg);
+            assert.equal('multi', msg.content.toString());
             latch--;
             if (latch === 0) done();
         });
@@ -329,9 +319,8 @@ suite.onePerPull = testWithContext(function(done, CTX) {
     var target = 'testOnePerPull';
 
     for (var i=0; i < pulls.length; i++) {
-        pulls[i].setEncoding('utf8');
         pulls[i].on('data', function(m) {
-            if (m == msg) {
+            if (m.content.toString() == msg) {
                 if (--latch === 0) done();
             }
         });
@@ -348,7 +337,6 @@ suite.onePerPull = testWithContext(function(done, CTX) {
 
 suite.expiredPush = testWithContext(function(done, CTX){
   var pull = CTX.socket('PULL');
-  pull.setEncoding('utf8');
   
   var push = CTX.socket('PUSH');
   var target = 'testExpiration';
@@ -358,7 +346,7 @@ suite.expiredPush = testWithContext(function(done, CTX){
   function doPull() {
     setTimeout(function() {
       pull.once('data', function (msg) {
-        switch (msg) {
+        switch (msg.content.toString()) {
         case pre + "Expires":
           return done(new Error("Got expired msg"));
         case pre + "Does not expire":
