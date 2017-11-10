@@ -1,5 +1,5 @@
 {
-  "name": "rabbit.js",
+  "name": "bi-rabbitmq",
   "description": "Easy stream-based messaging using RabbitMQ",
   "version": "0.4.4",
   "homepage": "http://github.com/squaremo/rabbit.js",
