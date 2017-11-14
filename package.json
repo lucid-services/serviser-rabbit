@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "amqplib": "0.5.1",
-    "node-uuid": "^1.4.8",
+    "uuid": "^3.0.1",
     "readable-stream": "~1 >=1.0.2"
   },
   "devDependencies": {
