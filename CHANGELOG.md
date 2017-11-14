@@ -1,6 +1,12 @@
 rabbit.js release notes
 =======================
 
+FUTURE
+------
+
+* [ADDED] - Allow to define `contentType` option when instantiating a new Socket
+* [ADDED] - Allow to declare `Publish` & `Subscribe` sockets durable with persistent messages
+
 v0.5.0
 ------
 
