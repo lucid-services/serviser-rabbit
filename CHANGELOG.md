@@ -1,6 +1,14 @@
 rabbit.js release notes
 =======================
 
+v0.5.0
+------
+
+* [CHANGED] - streams work with the whole `message` objects as opposed to `message.content` data buffer
+* [ADDED] - Allow to define `contentType` option when instantiating a new Socket
+* [ADDED] - Allow to declare `Publish` & `Subscribe` sockets durable with persistent messages
+
+
 v0.4.4
 ------
 
@@ -129,3 +137,4 @@ Main changes since v0.2:
 
 [amqplib]: https://squaremo.github.com/amqp.node
 [socket-types]: https://github.com/squaremo/rabbit.js#socket-types
+

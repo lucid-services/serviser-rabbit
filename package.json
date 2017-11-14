@@ -1,13 +1,21 @@
 {
-  "name": "rabbit.js",
+  "name": "bi-rabbitmq",
   "description": "Easy stream-based messaging using RabbitMQ",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "homepage": "http://github.com/squaremo/rabbit.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/squaremo/rabbit.js.git"
   },
   "author": "Michael Bridgen <mikeb@squaremobius.net>",
+  "files": [
+      "CHANGELOG.md",
+      "LICENSE",
+      "LICENSE-MPL",
+      "README.md",
+      "index.js",
+      "lib"
+  ],
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -20,8 +28,8 @@
     "node": ">=0.8 <0.13 || ^1"
   },
   "dependencies": {
-    "amqplib": "0.3.2",
-    "node-uuid": "",
+    "amqplib": "0.5.1",
+    "uuid": "^3.0.1",
     "readable-stream": "~1 >=1.0.2"
   },
   "devDependencies": {
