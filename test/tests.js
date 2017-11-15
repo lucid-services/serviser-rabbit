@@ -54,6 +54,10 @@ function testWithContext(test) {
     };
 }
 
+suite.inspectConnectionIntegrity = testWithContext(function(done, CTX) {
+  return CTX.inspectIntegrity().asCallback(done);
+});
+
 suite.closeConnectionWithoutSocket = testWithContext(function(done, CTX) {
   CTX.on('error', done);
   CTX.on('close', done);

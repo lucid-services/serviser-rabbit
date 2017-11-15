@@ -1,6 +1,11 @@
 rabbit.js release notes
 =======================
 
+FUTURE
+------
+
+* [ADDED] - `inspectIntegrity` method to the `Context` connection prototype
+
 v0.5.0
 ------
 
