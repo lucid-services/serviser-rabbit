@@ -1,7 +1,7 @@
 rabbit.js release notes
 =======================
 
-FUTURE
+v0.5.1
 ------
 
 * [ADDED] - `createConnection` alias of `createContext` method of the exported module
