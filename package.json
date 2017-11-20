@@ -1,7 +1,7 @@
 {
   "name": "bi-rabbitmq",
   "description": "Easy stream-based messaging using RabbitMQ",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "homepage": "http://github.com/squaremo/rabbit.js",
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "node": ">=0.8 <0.13 || ^1"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "amqplib": "0.5.1",
     "uuid": "^3.0.1",
     "readable-stream": "~1 >=1.0.2"
