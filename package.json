@@ -1,7 +1,7 @@
 {
   "name": "serviser-rabbit",
   "description": "Easy stream-based messaging using RabbitMQ",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "http://github.com/lucid-services/serviser-rabbit",
   "repository": {
     "type": "git",

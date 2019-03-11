@@ -1,7 +1,7 @@
 rabbit.js release notes
 =======================
 
-FUTURE
+v0.5.2
 ------
 
 * [CHANGED] - change project name to `serviser-rabbit`
