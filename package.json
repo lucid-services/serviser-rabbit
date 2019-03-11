@@ -1,11 +1,11 @@
 {
-  "name": "bi-rabbitmq",
+  "name": "serviser-rabbit",
   "description": "Easy stream-based messaging using RabbitMQ",
-  "version": "0.5.1",
-  "homepage": "http://github.com/squaremo/rabbit.js",
+  "version": "0.5.2",
+  "homepage": "http://github.com/lucid-services/serviser-rabbit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/squaremo/rabbit.js.git"
+    "url": "https://github.com/lucid-services/serviser-rabbit.git"
   },
   "author": "Michael Bridgen <mikeb@squaremobius.net>",
   "files": [
@@ -25,11 +25,11 @@
     "test": "./node_modules/mocha/bin/mocha --ui exports test"
   },
   "engines": {
-    "node": ">=0.8 <0.13 || ^1"
+      "node": ">=6.4.0"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "amqplib": "0.5.1",
+    "amqplib": "0.5.3",
     "uuid": "^3.0.1",
     "readable-stream": "~1 >=1.0.2"
   },

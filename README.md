@@ -2,7 +2,7 @@
 
     $ npm install rabbit.js
 
-This library provides a simple, socket-oriented API* for messaging in
+This library provides a simple, socket-oriented API for messaging in
 [Node.JS](http://nodejs.org/), using
 [RabbitMQ](http://www.rabbitmq.com/) as a backend.
 
